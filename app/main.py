@@ -1,6 +1,10 @@
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 import uvicorn
+import aioredis
 from api.api_v1.api import router as notif_router
+from core.config import settings
+
 
 
 app = FastAPI()
