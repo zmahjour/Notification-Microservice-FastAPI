@@ -23,3 +23,23 @@ conf = ConnectionConfig(
 )
 
 
+@router.post("/email", status_code=status.HTTP_200_OK)
+async def send_email(request: Request, email: EmailSchema) -> JSONResponse:
+    otp = create_otp()
+    text = f"OTP Code: {otp}"
+    redis = request.app.state.redis
+    email = email.model_dump().get("email")
+
+    message = MessageSchema(
+        subject="Notification",
+        recipients=email,
+        body=text,
+        subtype=MessageType.plain,
+    )
+
+    fm = FastMail(conf)
+    await fm.send_message(message)
+
+    await redis.set(email[0], otp, settings.OTP_EXPIRE_TIME)
+
+    return {"detail": "Email has been sent."}
