@@ -17,6 +17,10 @@ class Settings(BaseSettings):
     # OTP
     OTP_EXPIRE_TIME: int = 120
 
+    # Redis
+    REDIS_HOST: str
+    REDIS_PORT: int
+    REDIS_DB: int
 
     class Config:
         env_file = (
