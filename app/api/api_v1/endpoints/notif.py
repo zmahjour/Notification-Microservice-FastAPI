@@ -5,3 +5,7 @@ from schemas.notif import EmailSchema
 from core.config import settings
 from utils.utils import create_otp
 
+
+router = APIRouter(prefix="/notif", tags=["notification"])
+
+
