@@ -14,6 +14,10 @@ class Settings(BaseSettings):
     USE_CREDENTIALS: bool
     VALIDATE_CERTS: bool
 
+    # OTP
+    OTP_EXPIRE_TIME: int = 120
+
+
     class Config:
         env_file = (
             "/home/samane/Documents/MaktabSharif/FinalProject/Project/Notification/.env"
